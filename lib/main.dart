@@ -2,8 +2,6 @@ import 'package:clothis/screens/auth/auth.dart';
 import 'package:clothis/screens/loading/loading.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'styles/style.dart';
 
 // import 'package:flutter/flutter_svg.dart';
 void main() {
