@@ -21,10 +21,10 @@ class _AuthFormState extends State<AuthForm> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
+  // If the data are correct we save form and send data to the parent widget
   void validateForm(){
     final form = _formkey.currentState;
     if(form.validate()){
@@ -79,7 +79,7 @@ class _AuthFormState extends State<AuthForm> {
                 color: primaryColor,
                 textColor: Colors.white,
                 child: Text(
-                  (widget.formMode == FormMode.LOGIN) ? "Login" : "Signin",
+                  (widget.formMode == FormMode.LOGIN) ? "Login" : "Sign Up",
                 )),
           )
         ],

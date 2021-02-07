@@ -1,5 +1,7 @@
 import 'package:clothis/screens/auth/auth.dart';
+import 'package:clothis/screens/home/home.dart';
 import 'package:clothis/screens/loading/loading.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -43,15 +45,14 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: _initialization,
-      builder: (context, snapshot) {
-        if(snapshot.connectionState ==  ConnectionState.done){
-          return Auth();
-        }
+        future: _initialization,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return Auth();
+          }
 
-        // if the connection to firebase is not already done show loading screen
-        return Loading();
-      },
-    );
+          // if the connection to firebase is not already done show loading screen
+          return Loading();
+        });
   }
 }
