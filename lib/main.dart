@@ -49,6 +49,7 @@ class App extends StatelessWidget {
           return Auth();
         }
 
+        // if the connection to firebase is not already done show loading screen
         return Loading();
       },
     );

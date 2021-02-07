@@ -6,8 +6,9 @@ import 'FormMode.dart';
 
 class AuthForm extends StatefulWidget {
   FormMode formMode;
+  final callback;
 
-  AuthForm(this.formMode);
+  AuthForm(this.formMode, this.callback);
 
   @override
   _AuthFormState createState() => _AuthFormState();
@@ -15,11 +16,21 @@ class AuthForm extends StatefulWidget {
 
 class _AuthFormState extends State<AuthForm> {
   final _formkey = GlobalKey<FormState>();
+  String email = "";
+  String password = "";
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+  }
+
+  void validateForm(){
+    final form = _formkey.currentState;
+    if(form.validate()){
+      form.save();
+      widget.callback(email, password);
+    }
   }
 
   @override
@@ -40,8 +51,8 @@ class _AuthFormState extends State<AuthForm> {
                   icon: Icon(Icons.mail, color: Colors.black),
                 ),
                 validator: (value) =>
-                    value.isEmpty ? 'Email can\'t b empty' : null,
-                onSaved: null,
+                    value.isEmpty ? 'Email can\'t be empty' : null,
+                onSaved: (value) => email = value.trim(),
               )),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 5.0),
@@ -58,13 +69,13 @@ class _AuthFormState extends State<AuthForm> {
               ),
               validator: (value) =>
                   value.isEmpty ? 'Password can\'t be empty' : null,
-              onSaved: (value) => {print(value)},
+              onSaved: (value) => password = value.trim(),
             ),
           ),
           Padding(
             padding: EdgeInsets.symmetric(vertical: 8.0),
             child: RaisedButton(
-                onPressed: () {},
+                onPressed: validateForm,
                 color: primaryColor,
                 textColor: Colors.white,
                 child: Text(

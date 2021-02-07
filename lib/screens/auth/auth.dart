@@ -18,6 +18,13 @@ class _AuthState extends State<Auth> {
     }));
   }*/
 
+  // Retrieve the data entered in the form
+  void retrieveData(String email, String password){
+    print(email);
+    print(password);
+  }
+
+  // Switch between login and sinup mode
   void switchFormMode() {
     setState(() {
       _formMode =
@@ -41,7 +48,7 @@ class _AuthState extends State<Auth> {
                         height: 90.0,
                         width: 90.0,
                         child: SvgPicture.asset('assets/logo.svg')))),
-            AuthForm(_formMode),
+            AuthForm(_formMode, retrieveData),
             RaisedButton(
                 child: Text((_formMode == FormMode.LOGIN) ?  "Signin" : "Login"),
                 textColor: Colors.black,
