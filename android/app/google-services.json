@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "914132231756",
+    "project_id": "clothis-5e7d2",
+    "storage_bucket": "clothis-5e7d2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:914132231756:android:ecaa92672aa30ffde936e9",
+        "android_client_info": {
+          "package_name": "com.example.clothis"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "914132231756-37i5v308214h0tqci17hmfth861n14f1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxZv8dxlDOLY29l5RIt4bKKEdL0tT8q-I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "914132231756-37i5v308214h0tqci17hmfth861n14f1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
