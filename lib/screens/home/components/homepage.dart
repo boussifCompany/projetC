@@ -1,3 +1,4 @@
+import 'package:clothis/screens/home/components/weather.dart';
 import 'package:flutter/cupertino.dart';
 
 class Homepage extends StatefulWidget {
@@ -8,6 +9,8 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Column(
+      children: <Widget>[Weather()],
+    );
   }
 }

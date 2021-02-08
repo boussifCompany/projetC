@@ -1,3 +1,4 @@
+import 'package:clothis/screens/home/components/homepage.dart';
 import 'package:clothis/services/get_current_user.dart';
 import 'package:clothis/styles/style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -11,14 +12,13 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  User _user = getCurrentUser();
   int _selectedIndex = 0;
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text('Homepage'),
+  static List<Widget> _widgetOptions = <Widget>[
+    Homepage(),
     Text('Wardrobe'),
   ];
 
-  void _onItemTapped(int _index){
+  void _onItemTapped(int _index) {
     setState(() {
       _selectedIndex = _index;
     });
@@ -28,28 +28,30 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
           backgroundColor: Colors.white,
-          title: Center(
-              child: Text(
+          title: Text(
             'Home',
-            style: TextStyle(color: Colors.black, fontSize: 24),
-          ))),
-      body: _widgetOptions[_selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        selectedItemColor: primaryColor,
-        onTap: _onItemTapped,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.dns),
-              label: 'Wardrobe'
-          )
-        ],
+            style: TextStyle(color: Colors.black, fontSize: 20),
+          )),
+      body: Padding(
+        padding: EdgeInsets.all(10),
+        child: _widgetOptions[_selectedIndex],
       ),
-    );
+      bottomNavigationBar: BottomNavigationBar(
+      currentIndex: _selectedIndex,
+      selectedItemColor: primaryColor,
+      onTap: _onItemTapped,
+      items: const <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          label: 'Home',
+        ),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.dns),
+            label: 'Wardrobe'
+        )
+      ],
+    ),);
   }
 }

@@ -2,7 +2,7 @@ import 'package:clothis/styles/style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'FormMode.dart';
+import '../../../models/FormMode.dart';
 
 class AuthForm extends StatefulWidget {
   FormMode formMode;

@@ -1,10 +1,11 @@
-import 'package:clothis/screens/auth/widgets/FormMode.dart';
-import 'package:clothis/screens/auth/widgets/auth_form.dart';
+import 'package:clothis/models/FormMode.dart';
 import 'package:clothis/screens/home/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+
+import 'components/auth_form.dart';
 
 class Auth extends StatefulWidget {
   @override
