@@ -1,5 +1,8 @@
 
 import 'package:clothis/screens/addCloth/components/add_cloth_form.dart';
+import 'package:clothis/services/create_new_clothe.dart';
+import 'package:clothis/services/get_current_user.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +12,12 @@ class AddCloth extends StatefulWidget {
 }
 
 class _AddClothState extends State<AddCloth> {
+  User user = getCurrentUser();
+
+  void _retrieveData(String type, String color, String brand){
+    createNewCloth(type, color, brand);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +32,7 @@ class _AddClothState extends State<AddCloth> {
             )),
         body: Padding(
           padding: EdgeInsets.all(15),
-          child: AddClothForm(),
+          child: AddClothForm(_retrieveData),
         ));
   }
 }
