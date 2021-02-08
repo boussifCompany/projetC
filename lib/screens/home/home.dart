@@ -1,6 +1,7 @@
 
 import 'package:clothis/screens/addCloth/add_cloth.dart';
 import 'package:clothis/screens/home/components/homepage.dart';
+import 'package:clothis/services/get_wardrobe.dart';
 import 'package:clothis/styles/style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ class _HomeState extends State<Home> {
   ];
 
   void _onItemTapped(int _index) {
+    getWardrobe();
     setState(() {
       _selectedIndex = _index;
     });

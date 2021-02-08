@@ -13,13 +13,16 @@ class AddCloth extends StatefulWidget {
 
 class _AddClothState extends State<AddCloth> {
   User user = getCurrentUser();
+  var ctx;
 
   void _retrieveData(String type, String color, String brand){
     createNewCloth(type, color, brand);
+    Navigator.of(ctx).pop();
   }
 
   @override
   Widget build(BuildContext context) {
+    ctx = context;
     return Scaffold(
         appBar: AppBar(
             iconTheme: IconThemeData(
