@@ -1,7 +1,7 @@
+
+import 'package:clothis/screens/addCloth/add_cloth.dart';
 import 'package:clothis/screens/home/components/homepage.dart';
-import 'package:clothis/services/get_current_user.dart';
 import 'package:clothis/styles/style.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -24,6 +24,12 @@ class _HomeState extends State<Home> {
     });
   }
 
+  void _addCloth(context){
+    Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+      return AddCloth();
+    }));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,6 +44,11 @@ class _HomeState extends State<Home> {
         padding: EdgeInsets.all(10),
         child: _widgetOptions[_selectedIndex],
       ),
+      floatingActionButton: (_selectedIndex == 1) ? FloatingActionButton(
+          onPressed: () => _addCloth(context),
+        child: Icon(Icons.add),
+        backgroundColor: primaryColor,
+      ) : null,
       bottomNavigationBar: BottomNavigationBar(
       currentIndex: _selectedIndex,
       selectedItemColor: primaryColor,

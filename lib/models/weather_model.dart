@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class WeatherModel{
   final double temp;
   final String description;
