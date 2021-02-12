@@ -1,7 +1,7 @@
 import 'package:clothis/models/wardrobe_model.dart';
 import 'package:clothis/screens/addCloth/add_cloth.dart';
 import 'package:clothis/screens/home/components/homepage.dart';
-import 'package:clothis/services/get_wardrobe.dart';
+import 'package:clothis/screens/home/components/wardrobe.dart';
 import 'package:clothis/styles/style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,27 +11,26 @@ class Home extends StatefulWidget {
 
   Home(this.wardrobe);
 
-
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
   int _selectedIndex = 0;
+  WardrobeModel _wardrobe;
 
-  static List<Widget> _widgetOptions = <Widget>[
-    Homepage(),
-    Text('Wardrobe'),
-  ];
+  static List<Widget> _widgetOptions;
 
   @override
   void initState() {
     super.initState();
-    print(widget.wardrobe);
+    _widgetOptions = <Widget>[
+      Homepage(),
+      Wardrobe(widget.wardrobe),
+    ];
   }
 
   void _onItemTapped(int _index) {
-    getWardrobe();
     setState(() {
       _selectedIndex = _index;
     });
