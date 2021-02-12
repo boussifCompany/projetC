@@ -1,4 +1,7 @@
+import 'package:clothis/models/cloth_types.dart';
+import 'package:clothis/models/colors_list.dart';
 import 'package:clothis/styles/style.dart';
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -6,20 +9,21 @@ class AddClothForm extends StatefulWidget {
   var callback;
 
   AddClothForm(this.callback);
+
   @override
   _AddClothFormState createState() => _AddClothFormState();
 }
 
 class _AddClothFormState extends State<AddClothForm> {
   final _formkey = GlobalKey<FormState>();
-  String _type = "";
-  String _color = "";
   String _brand = "";
+  String _type = EnumToString.convertToString(ClothTypes.HOODIE);
+  String _color = EnumToString.convertToString(ColorsList.BLACK);
 
-  void _sendData(){
+  void _sendData() {
     final form = _formkey.currentState;
 
-    if(form.validate()){
+    if (form.validate()) {
       form.save();
       widget.callback(_type, _color, _brand);
     }
@@ -27,8 +31,7 @@ class _AddClothFormState extends State<AddClothForm> {
 
   @override
   Widget build(BuildContext context) {
-    return
-      Form(
+    return Form(
         key: _formkey,
         child: ListView(
           children: <Widget>[
@@ -40,30 +43,53 @@ class _AddClothFormState extends State<AddClothForm> {
                 textAlign: TextAlign.center,
               ),
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 10),
-              child: TextFormField(
-                decoration: InputDecoration(hintText: 'Enter the cloth\'s type'),
-                validator: (value) =>
-                value.isEmpty ? 'You need to enter a type' : null,
-                onSaved: (value) => _type = value.trim().toLowerCase(),
-              ),
+            DropdownButtonFormField(
+              icon: Icon(Icons.arrow_downward),
+              iconSize: 20,
+              elevation: 16,
+              value: _type,
+              onChanged: (String newValue) {
+                setState(() {
+                  _type = newValue;
+                });
+              },
+              onSaved: (value) => _type = value.trim(),
+              style: TextStyle(color: primaryColor),
+              items:
+                  EnumToString.toList(ClothTypes.values).map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            ),
+            DropdownButtonFormField(
+              icon: Icon(Icons.arrow_downward),
+              iconSize: 20,
+              elevation: 16,
+              value: _color,
+              onChanged: (String newValue) {
+                setState(() {
+                  _color = newValue;
+                });
+              },
+              onSaved: (value) => _color = value.trim(),
+              style: TextStyle(color: primaryColor),
+              items:
+              EnumToString.toList(ColorsList.values).map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
             ),
             Padding(
               padding: EdgeInsets.symmetric(vertical: 10),
               child: TextFormField(
-                decoration: InputDecoration(hintText: 'Enter the cloth\'s color'),
+                decoration:
+                    InputDecoration(hintText: 'Enter the cloth\'s brand'),
                 validator: (value) =>
-                value.isEmpty ? 'You need to enter a type' : null,
-                onSaved: (value) => _color = value.trim().toLowerCase(),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 10),
-              child: TextFormField(
-                decoration: InputDecoration(hintText: 'Enter the cloth\'s brand'),
-                validator: (value) =>
-                value.isEmpty ? 'You need to enter a type' : null,
+                    value.isEmpty ? 'You need to enter a type' : null,
                 onSaved: (value) => _brand = value.trim().toLowerCase(),
               ),
             ),
@@ -75,7 +101,6 @@ class _AddClothFormState extends State<AddClothForm> {
                     textColor: Colors.white,
                     child: Text('Add Clothe')))
           ],
-        )
-      );
+        ));
   }
 }

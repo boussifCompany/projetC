@@ -1,4 +1,6 @@
 
+import 'package:clothis/models/cloth_types.dart';
+import 'package:clothis/models/colors_list.dart';
 import 'package:clothis/screens/addCloth/components/add_cloth_form.dart';
 import 'package:clothis/services/create_new_clothe.dart';
 import 'package:clothis/services/get_current_user.dart';
