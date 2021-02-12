@@ -11,7 +11,7 @@ Future<void> createNewCloth(String type, String color, String brand) async {
       .add({
         'type': type,
         'color': color,
-        'brand': brand // 42
+        'brand': brand
       })
       .then((value) => print("Cloth added"))
       .catchError((error) => print("Failed to add cloth: ${error}"));
