@@ -1,5 +1,8 @@
 import 'package:clothis/models/FormMode.dart';
+import 'package:clothis/models/wardrobe_model.dart';
 import 'package:clothis/screens/home/home.dart';
+import 'package:clothis/screens/loading/loading.dart';
+import 'package:clothis/services/get_wardrobe.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -37,8 +40,18 @@ class _AuthState extends State<Auth> {
 
   void goHome() {
     if (user != null) {
+      Future<WardrobeModel> _wardrobe = getWardrobe();
       Navigator.of(_ctx).push(MaterialPageRoute(builder: (_) {
-        return Home();
+        return FutureBuilder(
+            future: _wardrobe,
+            builder: (context, snapshot){
+              if(snapshot.hasData){
+                return Home(snapshot.data);
+              }
+
+              return Loading();
+            }
+        );
       }));
     }
   }

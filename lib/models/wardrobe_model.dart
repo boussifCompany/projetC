@@ -5,6 +5,10 @@ class WardrobeModel {
 
   WardrobeModel(this.clothes);
 
+  void addCloth(ClothModel cloth){
+    this.clothes.add(cloth);
+  }
+
   @override
   String toString() {
     StringBuffer s = new StringBuffer();
