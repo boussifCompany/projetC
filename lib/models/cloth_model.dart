@@ -7,4 +7,9 @@ class ClothModel{
   final ClothTypes type;
 
   ClothModel(this.color, this.type, this.brand);
+
+  @override
+  String toString() {
+    return "{type: ${type}, color: ${color}, brand: ${brand}}";
+  }
 }
