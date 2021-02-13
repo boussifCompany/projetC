@@ -22,6 +22,7 @@ class AddClothForm extends StatefulWidget {
 class _AddClothFormState extends State<AddClothForm> {
   final _formkey = GlobalKey<FormState>();
   File image = null;
+  String imagePath = "";
   String _brand = "";
   String _type = EnumToString.convertToString(ClothTypes.HOODIE);
   String _color = EnumToString.convertToString(ColorsList.BLACK);
@@ -31,7 +32,7 @@ class _AddClothFormState extends State<AddClothForm> {
 
     if (form.validate()) {
       form.save();
-      widget.callback(_type, _color, _brand);
+      widget.callback(_type, _color, _brand, image);
     }
   }
 
@@ -46,6 +47,8 @@ class _AddClothFormState extends State<AddClothForm> {
     final appDir = await syspath.getApplicationDocumentsDirectory();
     final fileName = path.basename(image.path);
     final savedImage = await image.copy('${appDir.path}/${fileName}');
+
+    
   }
 
   @override

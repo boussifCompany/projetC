@@ -1,10 +1,10 @@
-import 'package:clothis/models/cloth_types.dart';
-import 'package:clothis/models/colors_list.dart';
 import 'package:clothis/services/get_current_user.dart';
+import 'package:clothis/services/upload_file.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:io';
 
-Future<void> createNewCloth(String type, String color, String brand) async {
+Future<void> createNewCloth(String type, String color, String brand, File image) async {
   User user = getCurrentUser();
   CollectionReference userCollection =
       FirebaseFirestore.instance.collection(user.uid);
@@ -15,6 +15,6 @@ Future<void> createNewCloth(String type, String color, String brand) async {
         'color': color,
         'brand': brand
       })
-      .then((value) => print("Cloth added"))
+      .then((value) => uploadFile(image, value.id))
       .catchError((error) => print("Failed to add cloth: ${error}"));
 }
