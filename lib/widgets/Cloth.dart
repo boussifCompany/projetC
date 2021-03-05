@@ -1,7 +1,12 @@
+import 'package:clothis/models/cloth_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Cloth extends StatelessWidget {
+  final ClothModel cloth;
+
+  Cloth(this.cloth);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,7 +22,12 @@ class Cloth extends StatelessWidget {
         child: Padding(
             padding: EdgeInsets.all(5),
             child: Column(
-              children: <Widget>[Text('Type'), Text('Color'), Text('brand')],
+              children: <Widget>[
+                this.cloth.img,
+                Text('Type'),
+                Text('Color'),
+                Text('brand')
+              ],
             )));
   }
 }

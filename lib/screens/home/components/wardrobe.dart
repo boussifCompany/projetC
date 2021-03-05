@@ -19,11 +19,7 @@ class _WardrobeState extends State<Wardrobe> {
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
         crossAxisCount: 2,
-        children: <Widget>[
-          Cloth(),
-          Cloth(),
-          Cloth()
-        ],
+        children: widget.wardrobe.clothes.map((e) => Cloth(e)).toList(),
       ),
     );
   }
