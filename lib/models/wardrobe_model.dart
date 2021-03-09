@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:clothis/models/cloth_model.dart';
 import 'package:clothis/models/cloth_types.dart';
 import 'package:clothis/models/outfit_model.dart';
@@ -12,6 +14,33 @@ class WardrobeModel {
     this.clothes.add(cloth);
   }
 
+  List<ClothModel> getOutfit(List<Map> req){
+    List<ClothModel> res = new List<ClothModel>();
+    req.forEach((element) {
+      List<ClothModel> temp = new List<ClothModel>();
+      clothes.forEach((clothe) {
+        Map properties = clothe.getProperties();
+        bool k = true;
+
+        element.forEach((key, value) {
+          if (properties[key] != value) {
+            k = false;
+          }
+        });
+
+        if (k == true) {
+          temp.add(clothe);
+        }
+      });
+
+      var random = new Random();
+      var n = random.nextInt(temp.length);
+      res.add(temp[n]);
+    });
+
+    return res;
+  }
+
   OutfitModel generateOutfit(var temp) {
     List<Map> clothesTypes = new List<Map>();
 
@@ -22,25 +51,27 @@ class WardrobeModel {
 
     if (temp >= 18) {
       clothesTypes = [
-        {'type': 'pant'},
-        {'type': 'tshirt'},
-        {'type': 'coat'}
+        {'type': ClothTypes.PANT},
+        {'type': ClothTypes.TSHIRT},
+        {'type': ClothTypes.COAT}
       ];
     } else if (temp >= 12) {
       clothesTypes = [
-        {'type': 'pant'},
-        {'type': 'tshirt'},
-        {'type': 'sweat'},
-        {'type': 'coat'}
+        {'type': ClothTypes.PANT},
+        {'type': ClothTypes.TSHIRT},
+        {'type': ClothTypes.SWEAT},
+        {'type': ClothTypes.COAT}
       ];
     } else {
       clothesTypes = [
-        {'type': 'pant'},
-        {'type': 't-shirt'},
-        {'type': 'sweat'},
-        {'type': 'coat'}
+        {'type': ClothTypes.PANT},
+        {'type': ClothTypes.TSHIRT},
+        {'type': ClothTypes.SWEAT},
+        {'type': ClothTypes.COAT}
       ];
     }
+
+    return new OutfitModel(getOutfit(clothesTypes));
   }
 
   bool isEnoughCloth(){
@@ -59,10 +90,6 @@ class WardrobeModel {
     });
 
     return containsAll;
-  }
-
-  ClothModel selectCloth(List<Map> req) {
-
   }
 
   @override

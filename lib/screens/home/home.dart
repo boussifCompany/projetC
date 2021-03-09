@@ -39,7 +39,6 @@ class _HomeState extends State<Home> {
   }
 
   void retrieveCloth(ClothModel cloth){
-    print(cloth);
     widget.wardrobe.addCloth(cloth);
   }
 
