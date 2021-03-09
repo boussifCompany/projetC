@@ -1,9 +1,11 @@
 import 'package:clothis/models/cloth_model.dart';
 import 'package:clothis/models/wardrobe_model.dart';
 import 'package:clothis/screens/addCloth/add_cloth.dart';
+import 'package:clothis/screens/auth/auth.dart';
 import 'package:clothis/screens/home/components/homepage.dart';
 import 'package:clothis/screens/home/components/wardrobe.dart';
 import 'package:clothis/styles/style.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -52,11 +54,26 @@ class _HomeState extends State<Home> {
     }));
   }
 
+  Future<Auth> logout(context) async{
+    await FirebaseAuth.instance.signOut();
+
+    Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+      return Auth();
+    }));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
           automaticallyImplyLeading: false,
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.settings, color: Colors.black),
+              tooltip: 'Logout',
+              onPressed:() => logout(context),
+            )
+          ],
           backgroundColor: Colors.white,
           title: Text(
             'Home',
