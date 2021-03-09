@@ -51,23 +51,23 @@ class WardrobeModel {
 
     if (temp >= 18) {
       clothesTypes = [
-        {'type': ClothTypes.PANT},
-        {'type': ClothTypes.TSHIRT},
-        {'type': ClothTypes.COAT}
+        {'type': ClothTypes.PANT, 'hot': 1},
+        {'type': ClothTypes.TSHIRT, 'hot': 1},
+        {'type': ClothTypes.COAT, 'hot': 1}
       ];
-    } else if (temp >= 12) {
+    } else if (temp >= 8) {
       clothesTypes = [
-        {'type': ClothTypes.PANT},
-        {'type': ClothTypes.TSHIRT},
-        {'type': ClothTypes.SWEAT},
-        {'type': ClothTypes.COAT}
+        {'type': ClothTypes.PANT, 'hot': 2},
+        {'type': ClothTypes.TSHIRT, 'hot': 2},
+        {'type': ClothTypes.SWEAT, 'hot': 2},
+        {'type': ClothTypes.COAT, 'hot': 2}
       ];
     } else {
       clothesTypes = [
-        {'type': ClothTypes.PANT},
-        {'type': ClothTypes.TSHIRT},
-        {'type': ClothTypes.SWEAT},
-        {'type': ClothTypes.COAT}
+        {'type': ClothTypes.PANT, 'hot': 3},
+        {'type': ClothTypes.TSHIRT, 'hot': 3},
+        {'type': ClothTypes.SWEAT, 'hot': 3},
+        {'type': ClothTypes.COAT, 'hot': 3}
       ];
     }
 

@@ -4,6 +4,8 @@ import 'package:clothis/services/fetch_weather.dart';
 import 'package:flutter/cupertino.dart';
 
 class Weather extends StatefulWidget {
+  var retrieveTemp;
+  Weather(this.retrieveTemp);
   @override
   _WeatherState createState() => _WeatherState();
 }
@@ -23,6 +25,8 @@ class _WeatherState extends State<Weather> {
         future: futureWeather,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
+            widget.retrieveTemp(snapshot.data.temp);
+
             return WeatherCard(
               description: snapshot.data.description,
               temp: snapshot.data.temp,

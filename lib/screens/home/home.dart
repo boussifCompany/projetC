@@ -26,7 +26,7 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     _widgetOptions = <Widget>[
-      Homepage(),
+      Homepage(retrieveTemp),
       Wardrobe(widget.wardrobe),
     ];
   }
@@ -34,8 +34,12 @@ class _HomeState extends State<Home> {
   void _onItemTapped(int _index) {
     setState(() {
       _selectedIndex = _index;
-      print(widget.wardrobe.generateOutfit(18));
     });
+  }
+
+  void retrieveTemp(temp){
+    // print(temp);
+    // widget.wardrobe.generateOutfit(temp);
   }
 
   void retrieveCloth(ClothModel cloth){
