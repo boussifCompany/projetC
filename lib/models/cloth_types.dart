@@ -1,1 +1,1 @@
-enum ClothTypes {JEAN, TSHIRT, SWEAT, HOODIE, PANT, SHIRT, SHOE}
+enum ClothTypes {TSHIRT, SWEAT, PANT, SHIRT, SHOE, COAT}

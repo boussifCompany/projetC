@@ -24,7 +24,7 @@ class _AddClothFormState extends State<AddClothForm> {
   File image = null;
   String imagePath = "";
   String _brand = "";
-  String _type = EnumToString.convertToString(ClothTypes.HOODIE);
+  String _type = EnumToString.convertToString(ClothTypes.SWEAT);
   String _color = EnumToString.convertToString(ColorsList.BLACK);
 
   void _sendData() {

@@ -1,3 +1,4 @@
+import 'package:clothis/models/cloth_model.dart';
 import 'package:clothis/models/wardrobe_model.dart';
 import 'package:clothis/screens/addCloth/add_cloth.dart';
 import 'package:clothis/screens/home/components/homepage.dart';
@@ -33,12 +34,18 @@ class _HomeState extends State<Home> {
   void _onItemTapped(int _index) {
     setState(() {
       _selectedIndex = _index;
+      print(widget.wardrobe.generateOutfit(18));
     });
+  }
+
+  void retrieveCloth(ClothModel cloth){
+    print(cloth);
+    widget.wardrobe.addCloth(cloth);
   }
 
   void _addCloth(context) {
     Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-      return AddCloth();
+      return AddCloth(retrieveCloth);
     }));
   }
 

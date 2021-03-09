@@ -26,7 +26,7 @@ Future<WardrobeModel> getWardrobe() async {
     final String brand = data['brand'];
     final Image img = await getImage(id);
 
-    ClothModel cloth = new ClothModel(color, type, brand, id, img);
+    ClothModel cloth = new ClothModel(color, type, brand, img);
     clothes.add(cloth);
   }
 

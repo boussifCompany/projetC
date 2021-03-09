@@ -8,10 +8,9 @@ class ClothModel{
   final String brand;
   final ColorsList color;
   final ClothTypes type;
-  final String id;
   final Image img;
 
-  ClothModel(this.color, this.type, this.brand, this.id, this.img);
+  ClothModel(this.color, this.type, this.brand,  this.img);
 
   @override
   String toString() {
