@@ -19,6 +19,7 @@ class _WardrobeState extends State<Wardrobe> {
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
         crossAxisCount: 2,
+        childAspectRatio: 0.8,
         children: widget.wardrobe.clothes.map((e) => Cloth(e)).toList(),
       ),
     );
