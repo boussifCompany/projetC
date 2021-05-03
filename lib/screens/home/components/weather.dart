@@ -1,11 +1,8 @@
 import 'package:clothis/models/weather_model.dart';
 import 'package:clothis/screens/home/components/weather_card.dart';
-import 'package:clothis/services/fetch_weather.dart';
 import 'package:flutter/cupertino.dart';
 
 class Weather extends StatefulWidget {
-  var retrieveTemp;
-  Weather(this.retrieveTemp);
   @override
   _WeatherState createState() => _WeatherState();
 }
@@ -16,7 +13,6 @@ class _WeatherState extends State<Weather> {
   @override
   void initState() {
     super.initState();
-    futureWeather = fetchWeather();
   }
 
   @override
@@ -25,13 +21,13 @@ class _WeatherState extends State<Weather> {
         future: futureWeather,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            widget.retrieveTemp(snapshot.data.temp);
+            // widget.retrieveTemp(snapshot.data.temp);
 
-            return WeatherCard(
-              description: snapshot.data.description,
-              temp: snapshot.data.temp,
-              location: snapshot.data.location,
-            );
+            // return WeatherCard(
+            //   description: snapshot.data.description,
+            //   temp: snapshot.data.temp,
+            //   location: snapshot.data.location,
+            // );
           } else if (snapshot.hasError) {
             print(snapshot.error);
             return Text("Error occured");

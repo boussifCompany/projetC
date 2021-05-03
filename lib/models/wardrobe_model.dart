@@ -14,10 +14,10 @@ class WardrobeModel {
     this.clothes.add(cloth);
   }
 
-  List<ClothModel> getOutfit(List<Map> req){
-    List<ClothModel> res = new List<ClothModel>();
+  List<ClothModel> getOutfit(List<Map> req) {
+    List<ClothModel> res = [];
     req.forEach((element) {
-      List<ClothModel> temp = new List<ClothModel>();
+      List<ClothModel> temp = [];
       clothes.forEach((clothe) {
         Map properties = clothe.getProperties();
         bool k = true;
@@ -34,20 +34,23 @@ class WardrobeModel {
       });
 
       var random = new Random();
-      if(temp.length == 0){
+      if (temp.length == 0) {
         return null;
       }
       var n = random.nextInt(temp.length);
       res.add(temp[n]);
     });
-    return res;
+
+    if (res.length > 0) {
+      return res;
+    }
   }
 
   OutfitModel generateOutfit(var temp) {
     List<Map> clothesTypes = new List<Map>();
 
     // We start by checking that we have enough cloth
-    if(!isEnoughCloth()){
+    if (!isEnoughCloth()) {
       return null;
     }
 
@@ -76,17 +79,17 @@ class WardrobeModel {
     return new OutfitModel(getOutfit(clothesTypes));
   }
 
-  bool isEnoughCloth(){
+  bool isEnoughCloth() {
     bool containsAll = true;
     Set<String> clothTypes = new Set<String>();
 
     // We get all of the types of clothes
     clothes.forEach((cloth) {
-        clothTypes.add(EnumToString.convertToString(cloth.type));
+      clothTypes.add(EnumToString.convertToString(cloth.type));
     });
 
     EnumToString.toList(ClothTypes.values).forEach((value) {
-      if(!clothTypes.contains(value)){
+      if (!clothTypes.contains(value)) {
         containsAll = false;
       }
     });

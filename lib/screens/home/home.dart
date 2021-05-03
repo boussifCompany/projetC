@@ -1,6 +1,7 @@
 import 'package:clothis/models/cloth_model.dart';
 import 'package:clothis/models/outfit_model.dart';
 import 'package:clothis/models/wardrobe_model.dart';
+import 'package:clothis/models/weather_model.dart';
 import 'package:clothis/screens/addCloth/add_cloth.dart';
 import 'package:clothis/screens/auth/auth.dart';
 import 'package:clothis/screens/home/components/homepage.dart';
@@ -10,6 +11,7 @@ import 'package:clothis/styles/style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:clothis/services/fetch_weather.dart';
 
 class Home extends StatefulWidget {
   final WardrobeModel wardrobe;
@@ -22,19 +24,31 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int _selectedIndex = 0;
-  WardrobeModel _wardrobe;
+  var outfits = [];
   var mainContext;
-
   static List<Widget> _widgetOptions;
 
   @override
   void initState() {
     super.initState();
-    _widgetOptions = <Widget>[
-      Homepage(retrieveTemp, showOutfit, widget.wardrobe),
-      Wardrobe(widget.wardrobe),
+    _widgetOptions = [
+      Homepage(showOutfit, widget.wardrobe, null, []),
+      Wardrobe(widget.wardrobe)
     ];
+    getWeather();
   }
+
+  void getWeather() async{
+    WeatherModel weather = await fetchWeather();
+    setState(() {
+      outfits.add(widget.wardrobe.generateOutfit(0));
+      _widgetOptions = [
+        Homepage(showOutfit, widget.wardrobe, weather, outfits),
+        Wardrobe(widget.wardrobe)
+      ];
+    });
+  }
+
 
   void _onItemTapped(int _index) {
     setState(() {
@@ -42,12 +56,7 @@ class _HomeState extends State<Home> {
     });
   }
 
-  void retrieveTemp(temp){
-    // print(temp);
-    // print(widget.wardrobe.generateOutfit(18));
-  }
-
-  void retrieveCloth(ClothModel cloth){
+  void retrieveCloth(ClothModel cloth) {
     widget.wardrobe.addCloth(cloth);
   }
 
@@ -57,13 +66,13 @@ class _HomeState extends State<Home> {
     }));
   }
 
-  void showOutfit(OutfitModel outfit){
-    Navigator.of(mainContext).push(MaterialPageRoute(builder: (_){
+  void showOutfit(OutfitModel outfit) {
+    Navigator.of(mainContext).push(MaterialPageRoute(builder: (_) {
       return OutfitPage(outfit);
     }));
   }
 
-  Future<Auth> logout(context) async{
+  Future<Auth> logout(context) async {
     await FirebaseAuth.instance.signOut();
 
     Navigator.of(context).push(MaterialPageRoute(builder: (_) {
@@ -82,7 +91,7 @@ class _HomeState extends State<Home> {
             IconButton(
               icon: const Icon(Icons.settings, color: Colors.black),
               tooltip: 'Logout',
-              onPressed:() => logout(context),
+              onPressed: () => logout(context),
             )
           ],
           backgroundColor: Colors.white,

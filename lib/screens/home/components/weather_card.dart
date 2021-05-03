@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 class WeatherCard extends StatefulWidget {
   final String location;
   final String description;
-  final double temp;
+  var temp;
 
-  WeatherCard({this.location, this.description, this.temp});
+  WeatherCard(this.location, this.description, this.temp);
 
   @override
   _WeatherCardState createState() => _WeatherCardState();
