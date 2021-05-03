@@ -34,10 +34,12 @@ class WardrobeModel {
       });
 
       var random = new Random();
+      if(temp.length == 0){
+        return null;
+      }
       var n = random.nextInt(temp.length);
       res.add(temp[n]);
     });
-
     return res;
   }
 

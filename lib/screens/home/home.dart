@@ -1,9 +1,11 @@
 import 'package:clothis/models/cloth_model.dart';
+import 'package:clothis/models/outfit_model.dart';
 import 'package:clothis/models/wardrobe_model.dart';
 import 'package:clothis/screens/addCloth/add_cloth.dart';
 import 'package:clothis/screens/auth/auth.dart';
 import 'package:clothis/screens/home/components/homepage.dart';
 import 'package:clothis/screens/home/components/wardrobe.dart';
+import 'package:clothis/screens/outfitPage/outfit_page.dart';
 import 'package:clothis/styles/style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -21,6 +23,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int _selectedIndex = 0;
   WardrobeModel _wardrobe;
+  var mainContext;
 
   static List<Widget> _widgetOptions;
 
@@ -28,7 +31,7 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     _widgetOptions = <Widget>[
-      Homepage(retrieveTemp),
+      Homepage(retrieveTemp, showOutfit, widget.wardrobe),
       Wardrobe(widget.wardrobe),
     ];
   }
@@ -41,7 +44,7 @@ class _HomeState extends State<Home> {
 
   void retrieveTemp(temp){
     // print(temp);
-    // widget.wardrobe.generateOutfit(temp);
+    // print(widget.wardrobe.generateOutfit(18));
   }
 
   void retrieveCloth(ClothModel cloth){
@@ -51,6 +54,12 @@ class _HomeState extends State<Home> {
   void _addCloth(context) {
     Navigator.of(context).push(MaterialPageRoute(builder: (_) {
       return AddCloth(retrieveCloth);
+    }));
+  }
+
+  void showOutfit(OutfitModel outfit){
+    Navigator.of(mainContext).push(MaterialPageRoute(builder: (_){
+      return OutfitPage(outfit);
     }));
   }
 
@@ -64,7 +73,9 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    mainContext = context;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
           automaticallyImplyLeading: false,
           actions: <Widget>[

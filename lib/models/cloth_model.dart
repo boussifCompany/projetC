@@ -10,14 +10,15 @@ class ClothModel{
   final ColorsList color;
   final ClothTypes type;
   final Image img;
+  final hot;
 
-  ClothModel(this.color, this.type, this.brand,  this.img);
+  ClothModel(this.color, this.type, this.brand,  this.img, this.hot);
 
   Map<String, dynamic> getProperties() {
     Map<String, dynamic> properties = new Map<String, dynamic>();
     properties['color'] = this.color;
     properties['type'] = this.type;
-    // properties['hot'] = this.hot;
+    properties['hot'] = this.hot;
     return properties;
   }
 

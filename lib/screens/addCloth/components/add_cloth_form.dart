@@ -26,13 +26,14 @@ class _AddClothFormState extends State<AddClothForm> {
   String _brand = "";
   String _type = EnumToString.convertToString(ClothTypes.SWEAT);
   String _color = EnumToString.convertToString(ColorsList.BLACK);
+  String season = "summer";
 
   void _sendData() {
     final form = _formkey.currentState;
 
     if (form.validate()) {
       form.save();
-      widget.callback(_type, _color, _brand, image);
+      widget.callback(_type, _color, _brand, season,image);
     }
   }
 
@@ -47,8 +48,6 @@ class _AddClothFormState extends State<AddClothForm> {
     final appDir = await syspath.getApplicationDocumentsDirectory();
     final fileName = path.basename(image.path);
     final savedImage = await image.copy('${appDir.path}/${fileName}');
-
-    
   }
 
   @override
@@ -106,6 +105,26 @@ class _AddClothFormState extends State<AddClothForm> {
               onSaved: (value) => _color = value.trim(),
               style: TextStyle(color: primaryColor),
               items: EnumToString.toList(ColorsList.values)
+                  .map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            ),
+            DropdownButtonFormField(
+              icon: Icon(Icons.arrow_downward),
+              iconSize: 20,
+              elevation: 16,
+              value: season,
+              onChanged: (String newValue) {
+                setState(() {
+                  season = newValue;
+                });
+              },
+              onSaved: (value) => season = value.trim(),
+              style: TextStyle(color: primaryColor),
+              items: ["summer", "winter", "autumn", "spring"]
                   .map<DropdownMenuItem<String>>((String value) {
                 return DropdownMenuItem<String>(
                   value: value,

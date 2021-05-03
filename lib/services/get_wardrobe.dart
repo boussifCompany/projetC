@@ -25,8 +25,10 @@ Future<WardrobeModel> getWardrobe() async {
         EnumToString.fromString(ClothTypes.values, data['type']);
     final String brand = data['brand'];
     final Image img = await getImage(id);
+    final hot = data['hot'];
+    print(hot);
 
-    ClothModel cloth = new ClothModel(color, type, brand, img);
+    ClothModel cloth = new ClothModel(color, type, brand, img, hot);
     clothes.add(cloth);
   }
 

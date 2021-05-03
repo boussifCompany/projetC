@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:io';
 
-Future<void> createNewCloth(String type, String color, String brand, File image) async {
+Future<void> createNewCloth(String type, String color, String brand, File image, var hot) async {
   User user = getCurrentUser();
   CollectionReference userCollection =
       FirebaseFirestore.instance.collection(user.uid);
@@ -13,7 +13,8 @@ Future<void> createNewCloth(String type, String color, String brand, File image)
       .add({
         'type': type,
         'color': color,
-        'brand': brand
+        'brand': brand,
+        'hot': hot,
       })
       .then((value) => uploadFile(image, value.id))
       .catchError((error) => print("Failed to add cloth: ${error}"));

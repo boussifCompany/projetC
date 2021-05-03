@@ -22,15 +22,22 @@ class _AddClothState extends State<AddCloth> {
   User user = getCurrentUser();
   var ctx;
 
-  void _retrieveData(String type, String color, String brand, File image){
+  void _retrieveData(String type, String color, String brand, String season, File image){
     // Create a new cloth add it to the wardrobe and save it into the db
     ColorsList colorType = EnumToString.fromString(ColorsList.values, color);
     ClothTypes clothTypes = EnumToString.fromString(ClothTypes.values, type);
     Image clothImg = Image.file(image);
+    var hot = 1;
 
-    ClothModel cloth = new ClothModel(colorType, clothTypes, brand, clothImg);
+    if(season == "spring" || season == "autumn") {
+      hot = 2;
+    }else if(season == "winter"){
+      hot = 3;
+    }
+
+    ClothModel cloth = new ClothModel(colorType, clothTypes, brand, clothImg, hot);
     // Save into db
-    createNewCloth(type, color, brand, image);
+    createNewCloth(type, color, brand, image, hot);
 
     // Pass it to the wardrobe
     widget.callback(cloth);
