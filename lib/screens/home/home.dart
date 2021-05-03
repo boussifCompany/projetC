@@ -41,7 +41,7 @@ class _HomeState extends State<Home> {
   void getWeather() async{
     WeatherModel weather = await fetchWeather();
     setState(() {
-      outfits.add(widget.wardrobe.generateOutfit(0));
+      outfits.add(widget.wardrobe.generateOutfit(weather.temp));
       _widgetOptions = [
         Homepage(showOutfit, widget.wardrobe, weather, outfits),
         Wardrobe(widget.wardrobe)

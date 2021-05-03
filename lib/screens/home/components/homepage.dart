@@ -26,11 +26,15 @@ class _HomepageState extends State<Homepage> {
             ? WeatherCard(widget.weather.location, widget.weather.description,
                 widget.weather.temp)
             : Container()),
-        (widget.outfits.length >= 1
-            ? GestureDetector(
-                onTap: () => widget.showOutfit(widget.outfits[0]),
-                child: (widget.outfits[0] != null ? Outfit() : null))
-            : Container())
+        Expanded(
+            child: ListView.builder(
+          itemCount: widget.outfits.length,
+          itemBuilder: (context, index) {
+            return GestureDetector(
+                onTap: () => widget.showOutfit(widget.outfits[index]),
+                child: (widget.outfits[index] != null ? Outfit() : null));
+          },
+        ))
       ],
     );
   }
