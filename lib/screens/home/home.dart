@@ -38,17 +38,19 @@ class _HomeState extends State<Home> {
     getWeather();
   }
 
-  void getWeather() async{
+  void getWeather() async {
     WeatherModel weather = await fetchWeather();
     setState(() {
-      outfits.add(widget.wardrobe.generateOutfit(weather.temp));
+      var outfit = widget.wardrobe.generateOutfit(18);
+      if (outfit != null) {
+        outfits.add(outfit);
+      }
       _widgetOptions = [
         Homepage(showOutfit, widget.wardrobe, weather, outfits),
         Wardrobe(widget.wardrobe)
       ];
     });
   }
-
 
   void _onItemTapped(int _index) {
     setState(() {

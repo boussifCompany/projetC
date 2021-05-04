@@ -44,10 +44,12 @@ class WardrobeModel {
     if (res.length > 0) {
       return res;
     }
+
+    return null;
   }
 
   OutfitModel generateOutfit(var temp) {
-    List<Map> clothesTypes = new List<Map>();
+    List<Map> clothesTypes = [];
 
     // We start by checking that we have enough cloth
     if (!isEnoughCloth()) {
@@ -76,7 +78,13 @@ class WardrobeModel {
       ];
     }
 
-    return new OutfitModel(getOutfit(clothesTypes));
+    final clothes = getOutfit(clothesTypes);
+
+    if (clothes == null){
+      return null;
+    }
+
+    return new OutfitModel(clothes);
   }
 
   bool isEnoughCloth() {

@@ -21,11 +21,11 @@ class _HomepageState extends State<Homepage> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        // Weather(retrieveTemp),
         (widget.weather != null
             ? WeatherCard(widget.weather.location, widget.weather.description,
                 widget.weather.temp)
             : Container()),
+        // (widget.outfits.length == 0 ? Text("null") : Container()),
         Expanded(
             child: ListView.builder(
           itemCount: widget.outfits.length,
