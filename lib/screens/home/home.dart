@@ -27,6 +27,7 @@ class _HomeState extends State<Home> {
   var outfits = [];
   var mainContext;
   static List<Widget> _widgetOptions;
+  var titles = ["Home", "Wardrobe"];
 
   @override
   void initState() {
@@ -41,9 +42,11 @@ class _HomeState extends State<Home> {
   void getWeather() async {
     WeatherModel weather = await fetchWeather();
     setState(() {
-      var outfit = widget.wardrobe.generateOutfit(18);
-      if (outfit != null) {
-        outfits.add(outfit);
+      for (var i = 0; i < 3; i++) {
+        var outfit = widget.wardrobe.generateOutfit(weather.temp);
+        if (outfit != null) {
+          outfits.add(outfit);
+        }
       }
       _widgetOptions = [
         Homepage(showOutfit, widget.wardrobe, weather, outfits),
@@ -91,14 +94,14 @@ class _HomeState extends State<Home> {
           automaticallyImplyLeading: false,
           actions: <Widget>[
             IconButton(
-              icon: const Icon(Icons.settings, color: Colors.black),
+              icon: const Icon(Icons.logout, color: Colors.black),
               tooltip: 'Logout',
               onPressed: () => logout(context),
             )
           ],
           backgroundColor: Colors.white,
           title: Text(
-            'Home',
+            titles[_selectedIndex],
             style: TextStyle(color: Colors.black, fontSize: 20),
           )),
       body: Padding(

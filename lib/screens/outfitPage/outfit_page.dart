@@ -59,6 +59,7 @@ class _OutfitPageState extends State<OutfitPage> {
                                   children: [
                                     Text(EnumToString.convertToString(widget.outfit.clothes[index].type)),
                                     Text(widget.outfit.clothes[index].brand),
+                                    Text('${widget.outfit.clothes[index].hot}')
                                   ],
                                 ),
                               )
